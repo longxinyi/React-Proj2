@@ -1,14 +1,22 @@
 import AddUser from "./components/Users/AddUser";
+import UserList from "./components/Users/UserList";
 import React, { useState } from "react";
 
-const emptyList = [];
+const emptyUserList = [];
 
 function App() {
-  const [userList, setUserList] = useState(emptyList);
+  const [userList, setUserList] = useState(emptyUserList);
+
+  const addUserDetails = (details) => {
+    setUserList((prevUserList) => {
+      return [details, ...prevUserList];
+    });
+  };
 
   return (
     <div>
-      <AddUser/>
+      <AddUser onAddUser={addUserDetails} />
+      <UserList userList={userList} />
     </div>
   );
 }

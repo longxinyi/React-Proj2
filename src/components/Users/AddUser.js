@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./AddUser.css";
 
 function AddUser(props) {
   const [enteredName, setEnteredName] = useState("");
@@ -15,22 +16,38 @@ function AddUser(props) {
   const submitFormHandler = (event) => {
     event.preventDefault();
 
-    //adding it to a list of users
+    const UserData = {
+      name: enteredName,
+      age: enteredAge,
+    };
+
+    props.onAddUser(UserData);
 
     setEnteredName("");
     setEnteredAge("");
-
   };
 
   return (
-  <form onSubmit={submitFormHandler}>
-    <label htmlFor="username">Username</label>
-    <input id="username" type="text" />
-    <label htmlFor="age">Age (Years)</label>
-    <input id="age" type="number" />
-    <button type="submit"> Add User</button>
-  </form>
+    <div className="add-user">
+      <form onSubmit={submitFormHandler}>
+        <div>
+        <label htmlFor="username" style={{fontWeight: "bold"}}>Username</label>
+        </div>
+        <div>
+        <input value={enteredName} type="text" onChange={nameChange} />
+        </div>
+        <div>
+        <label htmlFor="age" style={{fontWeight: "bold"}}>Age (Years)</label>
+        </div>
+        <div>
+        <input value={enteredAge} type="number" onChange={ageChange} />
+        </div>
+        <div>
+        <button type="submit"> Add User</button>
+        </div>
+      </form>
+    </div>
   );
-};
+}
 
 export default AddUser;
